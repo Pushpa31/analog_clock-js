@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p
+      id=""
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: cadetblue;
+        height: 100px;
+        width: 200px;
+        font-size: 40px;
+        position: relative;
+        left: 40%;
+        color: white;
+      "
+    >
+      <span id="hour"> </span>
+      :
+      <span id="min"> </span>
+      :
+      <span id="second"> </span>
+    </p>
+    <button
+      class="btn"
+      style="
+        position: relative;
+        height: 40px;
+        width: 80px;
+        left: 40%;
+        background-color: #05a658;
+        color: white;
+        border-radius: 25px;
+      "
+      onclick="start();"
+      id="start"
+    >
+      Start
+    </button>
+    <button
+      class="btn"
+      style="
+        position: relative;
+        left: 43%;
+        height: 40px;
+        width: 80px;
+        background-color: rgb(2, 105, 24);
+        color: white;
+        border-radius: 25px;
+      "
+      id="loop"
+      onclick="stop();"
+    >
+      Stop
+    </button>
+    <button
+      class="btn"
+      style="
+        position: relative;
+        left: 33%;
+        height: 40px;
+        width: 80px;
+        background-color: rgb(192, 76, 76);
+        color: white;
+      "
+      id="loop"
+      onclick="reset();"
+    >
+      Reset
+    </button>
+    <script>
+      var sec = 0;
+      var min = 0;
+      var hour = 0;
+      document.getElementById("second").innerHTML = "0" + sec;
+      document.getElementById("min").innerHTML = "0" + min;
+      document.getElementById("hour").innerHTML = "0" + hour;
+
+      function increment() {
+        //for seconds//
+        sec++;
+        if (sec > 60) {
+          sec = sec % 60;
+          min++;
+        }
+        if (sec < 10) {
+          document.getElementById("second").innerHTML = "0" + sec;
+        } else {
+          document.getElementById("second").innerHTML = sec;
+        }
+
+        //for minutes//
+        if (min > 60) {
+          min = min % 60;
+          hour++;
+        }
+
+        if (min < 10) {
+          document.getElementById("min").innerHTML = "0" + min;
+        } else {
+          document.getElementById("min").innerHTML = min;
+        }
+        //for hour//
+        if (hour > 60) {
+          hour = hour % 60;
+          hour++;
+        }
+        if (hour < 10) {
+          document.getElementById("hour").innerHTML = "0" + hour;
+        } else {
+          document.getElementById("hour").innerHTML = hour;
+        }
+      }
+      var interval;
+
+      function start() {
+        interval = setInterval(increment, 1000);
+        document.getElementById("start").disabled = true;
+        document.getElementById("loop").disabled = false;
+      }
+
+      function stop() {
+        clearInterval(interval);
+        document.getElementById("start").disabled = false;
+        document.getElementById("loop").disabled = true;
+      }
+      function reset() {
+        sec = 0;
+        min = 0;
+        hour = 0;
+        document.getElementById("second").innerHTML = "0" + sec;
+        document.getElementById("min").innerHTML = "0" + min;
+        document.getElementById("hour").innerHTML = "0" + hour;
+      }
+    </script>
+  </body>
+</html>
